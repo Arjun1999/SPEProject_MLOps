@@ -6,7 +6,7 @@ import numpy as np
 
 app = Flask(__name__)
 
-load_config('test')
+# load_config('test')
 model = load_model('deployment_24052021')
 cols = ['age', 'sex', 'bmi', 'children', 'smoker', 'region']
 
