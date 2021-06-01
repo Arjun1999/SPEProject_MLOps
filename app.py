@@ -6,6 +6,7 @@ import numpy as np
 
 app = Flask(__name__)
 
+load_config('test')
 model = load_model('deployment_24052021')
 cols = ['age', 'sex', 'bmi', 'children', 'smoker', 'region']
 
@@ -31,5 +32,5 @@ def predict_api():
     return jsonify(output)
 
 if __name__ == '__main__':
-    app.run(port = 5000, debug=True, host='0.0.0.0')
+    app.run(port = 7000, debug=True, host='0.0.0.0')
     
