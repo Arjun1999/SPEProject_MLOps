@@ -15,8 +15,11 @@ COPY requirements.txt /
 RUN pip install -r /requirements.txt
 
 # Expose port 
-EXPOSE 7000
+# EXPOSE 5000
 
 # Run the application:
 # , "--host=0.0.0.0", "--port=7000"
-CMD ["gunicorn", "--bind", "0.0.0.0:7000", "app:app"] 
+# CMD ["gunicorn", "--bind", "0.0.0.0:7000", "app:app"] 
+
+ENTRYPOINT ["python"]
+CMD ["app.py"]

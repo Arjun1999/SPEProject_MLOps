@@ -6,6 +6,7 @@ import numpy as np
 import os
 
 app = Flask(__name__)
+port = int(os.environ.get("PORT", 5000))
 
 # load_config('test')
 model = load_model('deployment_24052021')
@@ -33,6 +34,6 @@ def predict_api():
     return jsonify(output)
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 7000))
+    
     app.run(port = port, debug=True, host='0.0.0.0')
     
