@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM python:3.7-alpine
 
 RUN pip install virtualenv
 ENV VIRTUAL_ENV=/venv
@@ -15,4 +15,5 @@ RUN pip install -r requirements.txt
 EXPOSE 7000
 
 # Run the application:
-CMD ["flask", "run", "--host=0.0.0.0", "--port=7000"] 
+# , "--host=0.0.0.0", "--port=7000"
+CMD ["flask", "run"] 
