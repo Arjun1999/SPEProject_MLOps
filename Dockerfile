@@ -5,14 +5,14 @@ ENV VIRTUAL_ENV=/venv
 RUN virtualenv venv -p python3
 ENV PATH="VIRTUAL_ENV/bin:$PATH"
 
-COPY requirements.txt /
-RUN pip install -r /requirements.txt
+# RUN pip install -r /requirements.txt
 
 WORKDIR /app
 ADD . /app
 
 # Install dependencies
-# RUN pip install -r requirements.txt
+COPY requirements.txt /
+RUN pip install -r /requirements.txt
 
 # Expose port 
 EXPOSE 7000
