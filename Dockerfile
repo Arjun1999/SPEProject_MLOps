@@ -19,4 +19,4 @@ EXPOSE 7000
 
 # Run the application:
 # , "--host=0.0.0.0", "--port=7000"
-CMD ["gunicorn", "app:app"] 
+CMD ["gunicorn", "--bind", "0.0.0.0:7000", "app:app"] 
