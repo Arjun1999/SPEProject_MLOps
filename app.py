@@ -4,12 +4,13 @@ import pandas as pd
 import pickle
 import numpy as np
 import os
+import sys
 
 app = Flask(__name__)
 port = int(os.environ.get("PORT", 5000))
 
 # load_config('test')
-model = load_model('deployment_24052021')
+model = load_model(sys.argv[1])
 cols = ['age', 'sex', 'bmi', 'children', 'smoker', 'region']
 
 @app.route('/')

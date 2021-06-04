@@ -21,5 +21,5 @@ RUN pip install -r /requirements.txt
 # , "--host=0.0.0.0", "--port=7000"
 # CMD ["gunicorn", "--bind", "0.0.0.0:7000", "app:app"] 
 
-ENTRYPOINT ["python"]
-CMD ["app.py"]
+ENTRYPOINT ["python", "app.py"]
+CMD ["deployment_26052021.pkl"]
