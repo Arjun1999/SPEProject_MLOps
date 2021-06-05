@@ -61,7 +61,7 @@ pipeline
         }
         
         
-        stage('DockerHub Push (Contribution:p)'{
+        stage('DockerHub Push (Contribution:p)'){
             steps{
                 withCredentials([string(credentialsId: 'docker-hub', variable: 'DockerHubPassword')]) {
                     sh "docker login -u av99 -p ${DockerHubPassword}"
@@ -79,6 +79,13 @@ pipeline
             }
         }
         
+        stage('Testing (Test Model API calls)'){
+            steps{
+                    sh "python testing_predictor.py"
+                }
+        }
+        
+        
         stage('Deploy to Production'){
             steps{
               withCredentials([usernamePassword(credentialsId: '24f19683-175a-43d8-92f1-c9cd35b3d2fe', passwordVariable: 'HerokuLogin_Password', usernameVariable: 'HerokuLogin_Username')]) {
@@ -89,7 +96,9 @@ pipeline
         
         
     }
+
 }
+
 
 def getVersion()
 {
