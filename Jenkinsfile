@@ -36,11 +36,11 @@ pipeline
         //     }
         // }
         
-        // stage ('Remove Container'){
-        //     steps{
-        //         sh "docker rm temp-contain"
-        //     }
-        // }
+        stage ('Remove Container'){
+            steps{
+                sh "docker rm temp-contain"
+            }
+        }
         
         stage('Copy Model to Local Directory'){
         
