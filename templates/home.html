@@ -2,27 +2,33 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Predict Insurance Bill</title>
+  <title>Placement Tarot</title>
   <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='./style.css') }}">
-  
+
 </head>
 
 <body>
  <div class="login">
-	<h1>Predict Insurance Bill</h1>
+	<h1>Think you'll get placed?</h1>
 
      <!-- Form to enter new data for predictions  -->
     <form action="{{ url_for('predict')}}"method="POST">
-      <input type="text" name="age" placeholder="Age" required="required" /><br>
-    	<input type="text" name="sex" placeholder="Sex" required="required" /><br>
-        <input type="text" name="bmi" placeholder="BMI" required="required" /><br>
-        <input type="text" name="children" placeholder="Children" required="required" /><br>
-        <input type="text" name="smoker" placeholder="Smoker" required="required" /><br>
-        <input type="text" name="region" placeholder="Region" required="required" /><br>
+      <input type="text" name="RegNo." placeholder="RegNo." required="required" /><br>
+    	<input type="text" name="Quants" placeholder="Quants" required="required" /><br>
+        <input type="text" name="LogicalReasoning" placeholder="LogicalReasoning" required="required" /><br>
+        <input type="text" name="Verbal" placeholder="Verbal" required="required" /><br>
+        <input type="text" name="Programming" placeholder="Programming" required="required" /><br>
+        <input type="text" name="CGPA" placeholder="CGPA" required="required" /><br>
+        <input type="text" name="Networking" placeholder="Networking" required="required" /><br>
+        <input type="text" name="CloudComp" placeholder="CloudComp" required="required" /><br>
+        <input type="text" name="WebServices" placeholder="WebServices" required="required" /><br>
+        <input type="text" name="DataAnalytics" placeholder="DataAnalytics" required="required" /><br>
+        <input type="text" name="QualityAssurance" placeholder="QualityAssurance" required="required" /><br>
+        <input type="text" name="AI" placeholder="AI" required="required" /><br>
 
         <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
     </form>

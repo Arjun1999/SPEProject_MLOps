@@ -1,5 +1,5 @@
 from flask import Flask,request, url_for, redirect, render_template, jsonify
-from pycaret.regression import *
+from pycaret.classification import *
 import pandas as pd
 import pickle
 import numpy as np
@@ -11,7 +11,7 @@ port = int(os.environ.get("PORT", 5000))
 
 # load_config('test')
 model = load_model(sys.argv[1])
-cols = ['age', 'sex', 'bmi', 'children', 'smoker', 'region']
+cols = ['RegNo.', 'Quants', 'LogicalReasoning', 'Verbal', 'Programming', 'CGPA', 'Networking', 'CloudComp', 'WebServices', 'DataAnalytics', 'QualityAssurance', 'AI']
 
 @app.route('/')
 def home():
@@ -22,9 +22,16 @@ def predict():
     int_features = [x for x in request.form.values()]
     final = np.array(int_features)
     data_unseen = pd.DataFrame([final], columns = cols)
-    prediction = predict_model(model, data=data_unseen, round = 0)
+    prediction = predict_model(model, data=data_unseen)
     prediction = int(prediction.Label[0])
-    return render_template('home.html',pred='Expecteddd Bill will be {}'.format(prediction))
+
+    if(prediction == 1):
+        pred_str = "Congratulation! You are on track and good to go :)"
+    else:
+        pred_str = "Sorry :( You're not there yet but keep on going!"
+    
+    # return render_template('home.html',pred = 'Expecteddd Bill will be {}'.format(prediction))
+    return render_template('home.html',pred = pred_str)
 
 @app.route('/predict_api',methods=['POST'])
 def predict_api():

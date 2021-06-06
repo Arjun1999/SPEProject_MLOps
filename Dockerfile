@@ -22,4 +22,4 @@ RUN pip install -r /requirements.txt
 # CMD ["gunicorn", "--bind", "0.0.0.0:7000", "app:app"] 
 
 ENTRYPOINT ["python", "app.py"]
-CMD ["deployment_02062021"]
+CMD ["deployment_05062021"]
