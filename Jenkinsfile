@@ -50,7 +50,7 @@ pipeline
                 // sh "ls"
                 sh "docker run --name temp-contain -v /var/lib/jenkins/workspace/Flask-Docker-Jenkins-Heroku-Pipeline/Model2/:/app/ testing-model"
                 sh 'cp /var/lib/jenkins/workspace/Flask-Docker-Jenkins-Heroku-Pipeline/Model2/deployment_05062021.pkl /var/lib/jenkins/workspace/Flask-Docker-Jenkins-Heroku-Pipeline/'
-                sh 'scp -v -o StrictHostKeyChecking=no deployment_05062021.pkl arjun@192.168.1.15:/home/arjun/Desktop/Semester_8/SPE/FinalProject/'
+                sh 'scp -v -o StrictHostKeyChecking=no deployment_05062021.pkl arjun@172.17.0.1:/home/arjun/Desktop/Semester_8/SPE/FinalProject/'
             }
         }
         

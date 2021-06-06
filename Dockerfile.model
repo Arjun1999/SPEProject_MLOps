@@ -12,7 +12,7 @@ ADD ./Model2 /app
 ADD requirements.txt /app
 
 # Install dependencies
-COPY requirements.txt /
+# COPY requirements.txt /
 RUN pip install -r /requirements.txt
 
 # Expose port 
