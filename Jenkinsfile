@@ -48,9 +48,9 @@ pipeline
             steps{
                 // sh "cd Model1/"
                 // sh "ls"
-                sh "docker run --name temp-contain -v /var/lib/jenkins/workspace/Flask-Docker-Jenkins-Heroku-Pipeline/Model1/:/app/ testing-model"
-                sh 'cp /var/lib/jenkins/workspace/Flask-Docker-Jenkins-Heroku-Pipeline/Model1/deployment_02062021.pkl /var/lib/jenkins/workspace/Flask-Docker-Jenkins-Heroku-Pipeline/'
-                sh 'scp -v -o StrictHostKeyChecking=no deployment_02062021.pkl arjun@192.168.1.15:/home/arjun/Desktop/Semester_8/SPE/FinalProject/'
+                sh "docker run --name temp-contain -v /var/lib/jenkins/workspace/Flask-Docker-Jenkins-Heroku-Pipeline/Model2/:/app/ testing-model"
+                sh 'cp /var/lib/jenkins/workspace/Flask-Docker-Jenkins-Heroku-Pipeline/Model2/deployment_05062021.pkl /var/lib/jenkins/workspace/Flask-Docker-Jenkins-Heroku-Pipeline/'
+                sh 'scp -v -o StrictHostKeyChecking=no deployment_05062021.pkl arjun@192.168.1.15:/home/arjun/Desktop/Semester_8/SPE/FinalProject/'
             }
         }
         
@@ -90,7 +90,7 @@ pipeline
         
         }
         
-        
+
         stage('Deploy to Production'){
             steps{
               withCredentials([usernamePassword(credentialsId: '24f19683-175a-43d8-92f1-c9cd35b3d2fe', passwordVariable: 'HerokuLogin_Password', usernameVariable: 'HerokuLogin_Username')]) {
