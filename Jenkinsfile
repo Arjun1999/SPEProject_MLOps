@@ -42,13 +42,15 @@ pipeline
             }
         }
         
+        
         stage('Copy Model to Local Directory'){
         
             steps{
                 // sh "cd Model1/"
                 // sh "ls"
                 sh "docker run --name temp-contain -v /var/lib/jenkins/workspace/Flask-Docker-Jenkins-Heroku-Pipeline/Model1/:/app/ testing-model"
-                sh "cp Model1/deployment_02062021.pkl ../"
+                sh 'cp /var/lib/jenkins/workspace/Flask-Docker-Jenkins-Heroku-Pipeline/Model1/deployment_02062021.pkl /var/lib/jenkins/workspace/Flask-Docker-Jenkins-Heroku-Pipeline/'
+                sh 'scp -v -o StrictHostKeyChecking=no deployment_02062021.pkl arjun@192.168.1.15:/home/arjun/Desktop/Semester_8/SPE/FinalProject/'
             }
         }
         
@@ -81,8 +83,11 @@ pipeline
         
         stage('Testing (Test Model API calls)'){
             steps{
+    
                     sh "python testing_predictor.py"
-                }
+                
+        }
+        
         }
         
         
