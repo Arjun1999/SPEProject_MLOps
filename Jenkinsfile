@@ -25,16 +25,16 @@ pipeline
             }
         }
         
-        // stage('Run Container, Get ID')
-        // {
-        //     steps{
-        //         sh "docker run -d testing-model"
-        //     }
+        // // stage('Run Container, Get ID')
+        // // {
+        // //     steps{
+        // //         sh "docker run -d testing-model"
+        // //     }
             
-        //     environment{
-        //         CONTAINER_ID = getContainer()
-        //     }
-        // }
+        // //     environment{
+        // //         CONTAINER_ID = getContainer()
+        // //     }
+        // // }
         
         stage ('Remove Container'){
             steps{
@@ -43,18 +43,22 @@ pipeline
         }
         
         
-        stage('Copy Model to Local Directory'){
+        stage('Copy Model to Jenkins Workspace'){
         
             steps{
                 // sh "cd Model1/"
                 // sh "ls"
                 sh "docker run --name temp-contain -v /var/lib/jenkins/workspace/Flask-Docker-Jenkins-Heroku-Pipeline/Model2/:/app/ testing-model"
                 sh 'cp /var/lib/jenkins/workspace/Flask-Docker-Jenkins-Heroku-Pipeline/Model2/deployment_05062021.pkl /var/lib/jenkins/workspace/Flask-Docker-Jenkins-Heroku-Pipeline/'
-                sh 'scp -v -o StrictHostKeyChecking=no deployment_05062021.pkl arjun@172.17.0.1:/home/arjun/Desktop/Semester_8/SPE/FinalProject/'
+                
             }
         }
         
-        
+        stage('SSH and Copy to Local Machine'){
+            steps{
+                sh 'scp -v -o StrictHostKeyChecking=no deployment_05062021.pkl arjun@172.17.0.1:/home/arjun/Desktop/Semester_8/SPE/FinalProject/'
+            }
+        }
 
         stage('Docker Build (App)'){
             steps{
@@ -63,7 +67,7 @@ pipeline
         }
         
         
-        stage('DockerHub Push (Contribution:p)'){
+        stage('DockerHub Push (Contribution to OpenSource :p)'){
             steps{
                 withCredentials([string(credentialsId: 'docker-hub', variable: 'DockerHubPassword')]) {
                     sh "docker login -u av99 -p ${DockerHubPassword}"
@@ -75,11 +79,31 @@ pipeline
         
         stage('Deploy to Development'){
             steps{
+                    sh 'git config --global user.email jenkins@172.17.0.1'
+                    sh 'git config --global user.name jenkins'
+                    
               withCredentials([usernamePassword(credentialsId: '24f19683-175a-43d8-92f1-c9cd35b3d2fe', passwordVariable: 'HerokuLogin_Password', usernameVariable: 'HerokuLogin_Username')]) {
+                    
+                    sh 'git add .'
+                    sh 'git commit -m "New Model Loaded" '
+          
                     sh "git push https://heroku:${HerokuLogin_Password}@git.heroku.com/spe-fproject.git HEAD:master"
                 }
             }
         }
+        
+        // stage('Deploy to Development'){
+        //     steps{
+        //             withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'github_pwd', usernameVariable: 'github_user'), usernamePassword(credentialsId: '24f19683-175a-43d8-92f1-c9cd35b3d2fe', passwordVariable: 'heroku_pwd', usernameVariable: 'heroku_user')])
+        //             {  
+        //                     sh 'git add .'
+        //                     sh 'sudo git commit -m "New Model Loaded" '
+        //                     sh "git push https://heroku:${HerokuLogin_Password}@git.heroku.com/spe-fproject.git HEAD:master"
+        //             }
+    
+        //     }
+        // }
+        
         
         stage('Testing (Test Model API calls)'){
             steps{

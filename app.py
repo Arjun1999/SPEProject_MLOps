@@ -26,7 +26,7 @@ def predict():
     prediction = int(prediction.Label[0])
 
     if(prediction == 1):
-        pred_str = "Congratulation! You are on track and good to go :)"
+        pred_str = "Congratulations! You are on track and good to go :)"
     else:
         pred_str = "Sorry :( You're not there yet but keep on going!"
     
@@ -38,8 +38,12 @@ def predict_api():
     data = request.get_json(force=True)
     data_unseen = pd.DataFrame([data])
     prediction = predict_model(model, data=data_unseen)
-    output = prediction.Label[0]
-    return jsonify(output)
+
+    # Need for conversion here
+    output = int(prediction.Label[0])
+
+    output_convert = output.item()
+    return jsonify(output_convert)
 
 if __name__ == '__main__':
     
