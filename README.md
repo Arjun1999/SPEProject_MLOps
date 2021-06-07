@@ -1,4 +1,4 @@
-This project aims to achieve the creation of a complete CI/CD pipeline for a basic flask appplication using MLOps.
+This project aims to achieve the creation of a complete CI/CD pipeline for a basic real time predictor flask appplication using MLOps.
 
 
 
